@@ -1,0 +1,32 @@
+AppBundle\Entity\Job:
+    job_{1..10}:
+        name: <company()>
+        startDate: <(new \DateTime('2017-05-05'))>
+        description: <sentence()>
+
+AppBundle\Entity\Phase:
+    phase_{1..10}:
+        phaseNumber: <numberBetween(1000,5000)>
+        name: <word()>
+
+AppBundle\Entity\Item:
+    item_{1..10}:
+        name: <word()>
+
+AppBundle\Entity\MaterialRequest:
+    materialrequest_{1..10}:
+        requester: <name()>
+        job: '@job*'
+        #itemRequests: '@itemtequests'
+
+AppBundle\Entity\ItemRequest:
+    itemrequest_{1..10}:
+        item: '@item_*'
+        quantity: <randomDigit()>
+        materialRequest: '@materialrequest*'
+        phase: '@phase*'
+
+
+
+
+

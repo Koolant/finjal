@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Materialrequest</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ materialRequest.id }}</td>
+            </tr>
+            <tr>
+                <th>Job </th>
+                <td>{{ materialRequest.job }}</td>
+            </tr>
+            <tr>
+                <th>Requester</th>
+                <td>{{ materialRequest.requester }}</td>
+            </tr>
+            <tr>
+                <th>Datetime</th>
+                <td>{% if materialRequest.dateTime %}{{ materialRequest.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Items</th>
+                {% for itemRequest in materialRequest.itemRequests %}
+                <td>{{ itemRequest.item.name }} - {{ itemRequest.quantity }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('materialrequest_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('materialrequest_edit', { 'id': materialRequest.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

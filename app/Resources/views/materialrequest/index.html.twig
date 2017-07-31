@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Materialrequests list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Job</th>
+                <th>Requester</th>
+                <th>Datetime</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for materialRequest in materialRequests %}
+            <tr>
+                <td><a href="{{ path('materialrequest_show', { 'id': materialRequest.id }) }}">{{ materialRequest.id }}</a></td>
+                <td>{{ materialRequest.job }}</td>
+                <td>{{ materialRequest.requester }}</td>
+                <td>{% if materialRequest.dateTime %}{{ materialRequest.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('materialrequest_show', { 'id': materialRequest.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('materialrequest_edit', { 'id': materialRequest.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('materialrequest_new') }}">Create a new materialRequest</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
-    <div row>
-        <div class="col-xs-12">
-    <h1>Job edit</h1>
+    <div class="container">
+        <div row>
+            <div class="col-xs-12">
+                <h1>Job edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-            <ul class="list-inline">
-            <li class="list-inline-item">
-            <button type="submit" class="btn btn-primary">Edit</button>
-            </li>
-    {{ form_end(edit_form) }}
+                {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </li>
+                    {{ form_end(edit_form) }}
+                    <li class="list-inline-item">
+                        {{ form_start(delete_form) }}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        {{ form_end(delete_form) }}
+                    </li>
 
+                    <li class="list-inline-item">
+                        <form action="{{ path('job_index') }}">
+                            <button type="submit" class="btn btn-default">Back</button>
+                        </form>
+                    </li>
 
-        <li class="list-inline-item">
-            <form action="{{ path('job_index') }}">
-            <button type="submit" class="btn btn-default">Back</button>
-            </form>
-        </li>
-        <li class="list-inline-item">
-            {{ form_start(delete_form) }}
-            <button type="submit" class="btn btn-danger">Delete</button>
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

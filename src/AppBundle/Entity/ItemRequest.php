@@ -26,11 +26,12 @@ class ItemRequest
 
     /**
      * @ORM\ManyToOne(targetEntity="MaterialRequest", inversedBy="itemRequests")
+     * @ORM\JoinColumn(name="material_request_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $materialRequest;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Item")
+     * @ORM\ManyToOne(targetEntity="Item", cascade={"persist"})
      */
     private $item;
 
@@ -40,7 +41,7 @@ class ItemRequest
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Phase")
+     * @ORM\ManyToOne(targetEntity="Phase", cascade={"persist"})
      */
     private $phase;
 

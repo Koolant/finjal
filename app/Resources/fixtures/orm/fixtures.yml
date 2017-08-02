@@ -17,7 +17,7 @@ AppBundle\Entity\MaterialRequest:
     materialrequest_{1..10}:
         requester: <name()>
         job: '@job*'
-        #itemRequests: '@itemtequests'
+        #itemRequests: '@itemrequests'
 
 AppBundle\Entity\ItemRequest:
     itemrequest_{1..10}:
@@ -26,7 +26,6 @@ AppBundle\Entity\ItemRequest:
         materialRequest: '@materialrequest*'
         phase: '@phase*'
 
-
-
-
-
+AppBundle\Entity\User:
+    user_{1..10}:
+        email: koolan413+<current()>\@gmail.com

@@ -44,6 +44,7 @@ class MaterialRequest
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="materialRequest", cascade={"persist"})
+     * @ORM\JoinColumn(name="item_request_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $itemRequests;
 

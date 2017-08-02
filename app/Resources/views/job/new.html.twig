@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Job creation</h1>
+    <div class="container">
+        <div row>
+            <div class="col-xs-12">
+                <h1>New Job</h1>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                <button type="submit" class="btn btn-primary">Create</button>
+                    </li>
+                {{ form_end(form) }}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('job_index') }}">Back to the list</a>
-        </li>
-    </ul>
+                    <li class="list-inline-item">
+                        <a href="{{ path('job_index') }}">Back to the list</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

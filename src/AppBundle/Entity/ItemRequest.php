@@ -12,36 +12,36 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="item_request")
+ * @orm\Entity
+ * @orm\Table(name="item_request")
  */
 class ItemRequest
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @orm\Id
+     * @orm\Column(type="integer")
+     * @orm\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MaterialRequest", inversedBy="itemRequests")
-     * @ORM\JoinColumn(name="material_request_id", referencedColumnName="id", onDelete="CASCADE")
+     * @orm\ManyToOne(targetEntity="MaterialRequest", inversedBy="itemRequests")
+     * @orm\JoinColumn(name="material_request_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $materialRequest;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Item", cascade={"persist"})
+     * @orm\ManyToOne(targetEntity="Item", cascade={"persist"})
      */
     private $item;
 
     /**
-     * @ORM\Column(type="integer")
+     * @orm\Column(type="integer")
      */
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Phase", cascade={"persist"})
+     * @orm\ManyToOne(targetEntity="Phase", cascade={"persist"})
      */
     private $phase;
 

@@ -6,30 +6,30 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="job")
+ * @orm\Entity
+ * @orm\Table(name="job")
  */
 class Job
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @orm\Id
+     * @orm\Column(type="integer")
+     * @orm\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @orm\Column(type="string", length=100)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @orm\Column(type="date")
      */
     private $startDate;
 
     /**
-     * @ORM\Column(type="text")
+     * @orm\Column(type="text")
      */
     private $description;
 

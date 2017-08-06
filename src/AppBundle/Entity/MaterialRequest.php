@@ -13,38 +13,38 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="material_request")
+ * @orm\Entity
+ * @orm\HasLifecycleCallbacks()
+ * @orm\Table(name="material_request")
  */
 class MaterialRequest
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @orm\Id
+     * @orm\Column(type="integer")
+     * @orm\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Job")
+     * @orm\ManyToOne(targetEntity="Job")
      */
     private $job;
 
     /**
-     * @ORM\Column(type="string")
+     * @orm\Column(type="string")
      */
     private $requester;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @orm\Column(type="datetime", nullable=true)
      */
     private $dateTime;
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="ItemRequest", mappedBy="materialRequest", cascade={"persist"})
-     * @ORM\JoinColumn(name="item_request_id", referencedColumnName="id", onDelete="CASCADE")
+     * @orm\OneToMany(targetEntity="ItemRequest", mappedBy="materialRequest", cascade={"persist"})
+     * @orm\JoinColumn(name="item_request_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $itemRequests;
 
@@ -138,7 +138,7 @@ class MaterialRequest
     }
 
     /**
-    * @ORM\PrePersist
+    * @orm\PrePersist
     */
     public function onPrePersist()
     {

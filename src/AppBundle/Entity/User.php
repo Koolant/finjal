@@ -8,56 +8,28 @@
 
 namespace AppBundle\Entity;
 
-use Symfony\Component\Security\Core\Role\Role;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="user")
+ * @orm\Entity
+ * @orm\Table(name="`user`")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
+     * @orm\Id
+     * @orm\GeneratedValue(strategy="AUTO")
+     * @orm\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @return mixed
      */
-    private $email;
-
-    public function getRoles()
+    public function getId()
     {
-        return ['ROLE_USER'];
-    }
-
-    public function getPassword()
-    {
-    }
-
-    public function getSalt()
-    {
-    }
-
-    public function getUsername()
-    {
-        return $this->email;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
+        return $this->id;
     }
 }

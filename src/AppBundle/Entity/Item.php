@@ -12,22 +12,27 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="item")
+ * @orm\Entity
+ * @orm\Table(name="item")
  */
 class Item
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @orm\Id
+     * @orm\Column(type="integer")
+     * @orm\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @orm\Column(type="string")
      */
     private $name;
+
+    /**
+     * @orm\Column(type="string")
+     */
+    private $phase;
 
     /**
      * @return mixed
@@ -52,6 +57,23 @@ class Item
     {
         $this->name = $name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhase()
+    {
+        return $this->phase;
+    }
+
+    /**
+     * @param mixed $phase
+     */
+    public function setPhase($phase)
+    {
+        $this->phase = $phase;
+    }
+
 
     /**
      * @return mixed

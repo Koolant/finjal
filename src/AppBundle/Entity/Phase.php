@@ -12,25 +12,25 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="phase")
+ * @orm\Entity
+ * @orm\Table(name="phase")
  */
 class Phase
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @orm\Id
+     * @orm\Column(type="integer")
+     * @orm\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @orm\Column(type="string")
      */
     private $phaseNumber;
 
     /**
-     * @ORM\Column(type="string")
+     * @orm\Column(type="string")
      */
     private $name;
 

@@ -3,13 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\MaterialRequest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Materialrequest controller.
- *
+ * @Security("is_granted('ROLE_ADMIN')")
  * @Route("materialrequest")
  */
 class MaterialRequestController extends Controller

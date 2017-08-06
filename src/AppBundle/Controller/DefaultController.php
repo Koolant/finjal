@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($this->isGranted('ROLE_USER')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse('job');
         }
 

@@ -17,3 +17,9 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+doctrine_migrations:
+    dir_name: '%kernel.root_dir%/DoctrineMigrations'
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: 'Application Migrations'

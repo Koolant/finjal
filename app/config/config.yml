@@ -40,6 +40,10 @@ twig:
     form_themes:
         - bootstrap_3_layout.html.twig
 
+# Hautelook Alice fixtures path
+hautelook_alice:
+    fixtures_path: 'app/Resources/fixtures/orm/'
+
 # Doctrine Configuration
 doctrine:
     dbal:

@@ -1,0 +1,27 @@
+---
+- hosts: db
+
+  remote_user: pi
+
+  pre_tasks:
+    - name: Get aptitude and python
+      become: true
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - python-simplejson
+        - aptitude
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: safe
+
+  become: true
+  roles:
+    - mysql

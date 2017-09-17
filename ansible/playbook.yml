@@ -1,0 +1,206 @@
+---
+- hosts: dev
+
+  vars_prompt:
+    - name: symfony_env
+      prompt: "Enter environment (prod|dev|test)"
+      default: prod
+      private: no
+
+  vars_files:
+    - ./vars/vars.yml
+    - ./vars/vault.yml
+
+  environment:
+    SYMFONY_ENV: "{{ symfony_env|lower }}"
+
+  vars:
+    symfony_root_dir: /var/www/finjal
+    symfony_web_dir: "{{ symfony_root_dir }}/web"
+    symfony_var_dir: "{{ symfony_root_dir }}/var"
+    symfony_console_path: "{{ symfony_root_dir }}/bin/console"
+
+  remote_user: pi
+
+  pre_tasks:
+    - name: Convert Env to lower
+      set_fact:
+        symfony_env: "{{ symfony_env|lower }}"
+      tags:
+        - always
+
+    - name: Get aptitude and python
+      become: true
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - python-simplejson
+        - aptitude
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: safe
+
+  roles:
+    - nginx
+
+  tasks:
+    - debug:
+        var: ansible_env
+
+    - debug:
+        var: symfony_env
+
+    - name: PHP 7.1 Repo
+      become: true
+      apt_repository:
+        repo: deb http://repozytorium.mati75.eu/raspbian stretch-backports main contrib non-free
+        state: present
+
+    - name: Add repo key
+      become: true
+      apt_key:
+        keyserver: pgpkeys.mit.edu
+        id: CCD91D6111A06851
+
+    - name: Install low-level utilities
+      become: true
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - zip
+        - unzip
+
+    - name: Install Git
+      become: true
+      apt:
+        name: git
+
+    - name: Install mysql
+      become: true
+      apt:
+        name: mysql-server
+        state: latest
+
+    - name: Install PHP Modules
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - php7.1
+        - php7.1-fpm
+        - php7.1-imap
+        - php7.1-json
+        - php7.1-opcache
+        - php7.1-dev
+        - php7.1-common
+        - php7.1-cli
+        - php7.1-curl
+        - php7.1-intl
+        - php7.1-mysql
+        - php7.1-xml
+        - php7.1-dom
+        - php7.1-mbstring
+        - php7.1-mcrypt
+        - php7.1-tidy
+        - php7.1-gd
+      notify: Restart PHP-FPM
+
+    - name: Set date.timezone for CLI
+      become: true
+      lineinfile:
+        dest: /etc/php/7.1/cli/php.ini
+        regexp: "date.timezone ="
+        line: "date.timezone = UTC"
+
+    - name: Set date.timezone for FPM
+      become: true
+      lineinfile:
+        dest: /etc/php/7.1/fpm/php.ini
+        regexp: "date.timezone ="
+        line: "date.timezone = UTC"
+      notify: Restart PHP-FPM
+
+    - name: Build project directory
+      become: true
+      file:
+        path: "{{ symfony_root_dir }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        recurse: yes
+
+    - name: Checkout Repo
+      git:
+        repo: https://github.com/koolant/finjal.git
+        dest: "{{ symfony_root_dir }}"
+        force: yes
+      register: repo_code
+      tags:
+        - deploy
+
+    - name: Register code_changed fact
+      set_fact:
+        code_changed: repo_code.changed
+      tags:
+        - deploy
+
+    - name: Check for Composer
+      stat:
+        path: /usr/local/bin/composer
+      register: composer_stat
+      tags:
+        - deploy
+
+    - name: Download Composer
+      script: scripts/install_composer.sh
+      when: not composer_stat.stat.exists
+      tags:
+        - deploy
+
+    - name: Move Composer
+      become: true
+      command: mv composer.phar /usr/local/bin/composer
+      when: not composer_stat.stat.exists
+      tags:
+        - deploy
+
+    - name: Composer Permissions
+      become: true
+      file:
+        path: /usr/local/bin/composer
+        mode: "a+x"
+      tags:
+        - deploy
+
+    - name: Check composer version
+      become: true
+      composer:
+        working_dir: "{{ symfony_root_dir }}"
+        command: self-update
+      register: composer_self_update
+      changed_when: "not composer_self_update.msg|search('You are already using composer version')"
+      tags:
+        - deploy
+
+    - debug:
+        var: composer_self_update
+      tags:
+        - deploy
+
+    # Application bootstrapping
+    - include: ./includes/symfony-bootstrap.yml
+
+  handlers:
+    - name: Restart PHP-FPM
+      become: true
+      service:
+        name: php7.1-fpm
+        state: restarted

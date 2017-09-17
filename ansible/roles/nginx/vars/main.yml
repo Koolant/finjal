@@ -1,0 +1,4 @@
+---
+server_name: finjal.dev
+symfony_root_dir: /var/www/finjal
+symfony_web_dir: "{{ symfony_root_dir }}/web"

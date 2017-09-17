@@ -1,0 +1,29 @@
+---
+- name: Nginx install
+  become: true
+  apt:
+    name: nginx
+    state: latest
+  notify: Restart Nginx
+
+- name: Nginx config template
+  become: true
+  template:
+    src: templates/symfnginx.conf
+    dest: "/etc/nginx/sites-available/{{ server_name }}.conf"
+  notify: Restart Nginx
+
+- name: Nginx sites available
+  become: true
+  file:
+    src: "/etc/nginx/sites-available/{{ server_name }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ server_name }}.conf"
+    state: link
+  notify: Restart Nginx
+
+- name: Add hosts entry
+  become: true
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "{{ server_name }}"
+    line: "127.0.0.1 {{ server_name }}"

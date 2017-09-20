@@ -34,7 +34,7 @@ AppBundle\Entity\User:
         email: koolan413+<current()>\@gmail.com
 
 AppBundle\Entity\User:
-    user_test:
+    user_11:
         username: koolan
         password: test
         email: koolan@gmail.com

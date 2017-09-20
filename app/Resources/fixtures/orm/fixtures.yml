@@ -12,6 +12,7 @@ AppBundle\Entity\Phase:
 AppBundle\Entity\Item:
     item_{1..10}:
         name: <word()>
+        phase: '@phase*'
 
 AppBundle\Entity\MaterialRequest:
     materialrequest_{1..10}:
@@ -31,3 +32,9 @@ AppBundle\Entity\User:
         username: <username()>
         password: <password()>
         email: koolan413+<current()>\@gmail.com
+
+AppBundle\Entity\User:
+    user_test:
+        username: koolan
+        password: test
+        email: koolan@gmail.com

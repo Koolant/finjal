@@ -72,12 +72,12 @@
   tags:
     - deploy
 
-#- name: Fixtures
-#  command: '{{ symfony_console_path }} hautelook:fixtures:load --no-interaction'
-#  when: symfony_env != "prod"
-#  changed_when: false
-#  tags:
-#    - deploy
+- name: Fixtures
+  command: '{{ symfony_console_path }} hautelook:fixtures:load --no-interaction'
+  when: symfony_env != "prod"
+  changed_when: false
+  tags:
+    - deploy
 
 - name: Clear cache
   command: '{{ symfony_console_path }} cache:clear --env={{ symfony_env }}'

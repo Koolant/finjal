@@ -28,4 +28,5 @@ AppBundle\Entity\ItemRequest:
 
 AppBundle\Entity\User:
     user_{1..10}:
+        username: <username()>
         email: koolan413+<current()>\@gmail.com

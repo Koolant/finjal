@@ -36,4 +36,4 @@ AppBundle\Entity\User:
         username: koolan
         password: test
         email: koolan@gmail.com
-        roles: ['ROLE_ADMIN']
+        roles: ['ROLE_ADMIN','ROLE_USER']

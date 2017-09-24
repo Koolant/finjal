@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Materialrequest controller.
- * @Security("is_granted('ROLE_ADMIN')")
  * @Route("materialrequest")
  */
 class MaterialRequestController extends Controller

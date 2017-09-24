@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Job controller.
- * @Security("is_granted('ROLE_ADMIN')")
  * @Route("job")
  */
 class JobController extends Controller

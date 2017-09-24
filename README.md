@@ -1,5 +1,4 @@
-finjal
+Finjal [![Build Status](https://travis-ci.org/Koolant/finjal.svg?branch=master)](https://travis-ci.org/Koolant/finjal)
 ======
 
-A Symfony project created on July 29, 2017, 5:22 pm.
-test change
+Inventory and requisition management system
